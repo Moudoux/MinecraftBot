@@ -19,7 +19,7 @@ public class Main {
 		}
 		String username = args[0], password = args.length == 1 ? "" : args[1];
 		final Bot b = new Bot(username, password);
-		b.connect("");
+		b.connect("localhost:25565");
 		b.addListener(new SessionAdapter() {
 			@Override
 			public void packetReceived(PacketReceivedEvent event) {

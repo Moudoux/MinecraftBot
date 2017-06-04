@@ -13,6 +13,7 @@ import com.github.steveice10.mc.protocol.packet.ingame.client.ClientChatPacket;
 import com.github.steveice10.mc.protocol.packet.ingame.client.ClientRequestPacket;
 import com.github.steveice10.mc.protocol.packet.ingame.server.ServerChatPacket;
 import com.github.steveice10.mc.protocol.packet.ingame.server.ServerJoinGamePacket;
+import com.github.steveice10.mc.protocol.packet.ingame.server.entity.player.ServerPlayerHealthPacket;
 import com.github.steveice10.packetlib.Client;
 import com.github.steveice10.packetlib.event.session.DisconnectedEvent;
 import com.github.steveice10.packetlib.event.session.PacketReceivedEvent;
@@ -74,6 +75,11 @@ public class Bot {
 								+ ((TranslationMessage) message).getTranslationParams()[1] + " }");
 					} else if (event.<ServerChatPacket>getPacket().getType().equals(MessageType.SYSTEM)) {
 						logger.info(event.getPacket());
+					}
+				} else if (event.getPacket() instanceof ServerPlayerHealthPacket) {
+					ServerPlayerHealthPacket health = (ServerPlayerHealthPacket) event.getPacket();
+					if (health.getHealth() <= 0.0F) {
+						respawnBot();
 					}
 				}
 			}
