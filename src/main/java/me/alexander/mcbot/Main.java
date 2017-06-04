@@ -19,12 +19,12 @@ public class Main {
 		}
 		String username = args[0], password = args.length == 1 ? "" : args[1];
 		final Bot b = new Bot(username, password);
-		b.connect("localhost");
+		b.connect("");
 		b.addListener(new SessionAdapter() {
 			@Override
 			public void packetReceived(PacketReceivedEvent event) {
 				if (event.getPacket() instanceof ServerJoinGamePacket) {
-					b.sendPacket(new ClientChatPacket("This is a bot"));
+					b.sendPacket(new ClientChatPacket("Hey"));
 				}
 			}
 		});

@@ -5,10 +5,12 @@ import java.net.Proxy;
 import org.apache.log4j.Logger;
 
 import com.github.steveice10.mc.protocol.MinecraftProtocol;
+import com.github.steveice10.mc.protocol.data.game.ClientRequest;
 import com.github.steveice10.mc.protocol.data.game.MessageType;
 import com.github.steveice10.mc.protocol.data.message.Message;
 import com.github.steveice10.mc.protocol.data.message.TranslationMessage;
 import com.github.steveice10.mc.protocol.packet.ingame.client.ClientChatPacket;
+import com.github.steveice10.mc.protocol.packet.ingame.client.ClientRequestPacket;
 import com.github.steveice10.mc.protocol.packet.ingame.server.ServerChatPacket;
 import com.github.steveice10.mc.protocol.packet.ingame.server.ServerJoinGamePacket;
 import com.github.steveice10.packetlib.Client;
@@ -161,6 +163,15 @@ public class Bot {
 	public void sendPacket(Packet packet) {
 		if (isConnected()) {
 			client.getSession().send(packet);
+		}
+	}
+
+	/**
+	 * Respawns the bot
+	 */
+	public void respawnBot() {
+		if (isConnected()) {
+			sendPacket(new ClientRequestPacket(ClientRequest.RESPAWN));
 		}
 	}
 
