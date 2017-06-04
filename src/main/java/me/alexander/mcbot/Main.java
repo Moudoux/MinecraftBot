@@ -13,8 +13,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		Utils.initLogger();
-		logger.info("hey");
-		final Bot b = new Bot("MrBot");
+		if (args.length == 0) {
+			logger.info("Please provide a username and a password (optional)");
+			return;
+		}
+		String username = args[0], password = args.length == 1 ? "" : args[1];
+		final Bot b = new Bot(username, password);
 		b.connect("localhost");
 		b.addListener(new SessionAdapter() {
 			@Override
